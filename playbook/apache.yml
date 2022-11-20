@@ -1,0 +1,26 @@
+---
+- hosts: webserverstest
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: install packages
+      yum: name=httpd state=present
+
+    - name: start apache service
+      service: name=httpd state=started
+
+    - name: download file
+      get_url:
+        url: https://www.free-css.com/assets/files/free-css-templates/download/page285/evonyee.zip
+        dest: /tmp/evonyee.zip
+
+    - name: unzip the package
+      unarchive:
+        src: /tmp/evonyee.zip
+        dest: /tmp/
+        remote_src: yes
+    - name: copy static content
+      copy:
+        src: /tmp/evonyee
+        dest: /var/www/html
+        remote_src: yes
