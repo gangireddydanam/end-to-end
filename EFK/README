@@ -1,0 +1,8 @@
+# Once you run terraform apply command wait for user data to get installed.
+# if setup complete do the following manual configuration.
+# ssh to fb instance 
+# sudo vi /etc/filebeat/filebeat.yml
+# set => outputs hosts: ["18.138.35.172:9200"] (ek IP:9200)
+# sudo systemctl restart filebeat.service
+
+===NOW YOU ARE DONE===
