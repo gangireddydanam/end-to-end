@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: sample
+  labels:
+    app: sample
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample
+  template:
+    metadata:
+      labels:
+        app: sample
+    spec:
+      containers:
+      - name: sample
+        image: gcr.io/k8s-minikube/storage-provisioner:v5
+        ports:
+        - name: web
+          containerPort:  80
+          protocol: TCP
+      #   env:
+      #   - name: NGX_VERSION
+      #     value: 1.16.1
+      #   volumeMounts:
+      #   - name: localtime
+      #     mountPath: /etc/localtime
+      # volumes:
+      #   - name: localtime
+      #     hostPath:
+      #       path: /usr/share/zoneinfo/Asia/Shanghai
