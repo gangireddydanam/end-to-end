@@ -1,0 +1,16 @@
+---
+- hosts: hosts
+  become: True
+  become_user: root
+  tasks:
+    - name: download prometheus
+      get_url:
+        url: https://github.com/prometheus/prometheus/releases/download/v2.39.1/prometheus-2.39.1.linux-amd64.tar.gz
+        dest: /tmp
+    - name: unarchive prometheus
+      unarchive:
+        remote_src: yes
+        src: /tmp/prometheus-2.39.1.linux-amd64.tar.gz
+        dest: /tmp
+    - name: start the prometheus
+      shell: nohup /tmp/prometheus-2.39.1.linux-amd64/prometheus &
